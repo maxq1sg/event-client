@@ -1,37 +1,36 @@
-import { Formik, Form, Field } from "formik";
-import styled from "styled-components";
-import CustomCheckbox from "./CustomCheckbox";
-import FormikInputField from "./SearchInput";
+import { Formik, Form } from "formik";
+import { useContext, useState } from "react";
+import { HomeContext } from "../../pages";
+import { IEvent } from "../../types/event";
+import { ISearchInitValues } from "../../types/searchInitValues";
+import CheckBoxGroup from "../CheckBoxGroup/CheckBoxGroup";
+import CustomTextInput from "../CustomTextInput/CustomTextInput";
 
-const CheckboxGroup = styled.div`
-  display: flex;
-`;
-const mockData = [
-  { id: 1, name: "SPORT" },
-  { id: 2, name: "SPORTd2" },
-  { id: 3, name: "SPOR3" },
-  { id: 4, name: "SPORT4" },
-  { id: 5, name: "SPORT5" },
-];
 const SearchContainer = () => {
+  const { categories } = useContext(HomeContext);
+  const [searchResults, setSearchResults] = useState<IEvent[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
+  const initialValues: ISearchInitValues = {
+    query: "",
+    categoryIds: [],
+  };
   return (
     <Formik
-      initialValues={{
-        query: "",
-        categoryIds: [],
-      }}
+      initialValues={initialValues}
       onSubmit={async (values) => {
         alert(JSON.stringify(values, null, 2));
       }}
     >
       {({ values }) => (
         <Form>
-          <FormikInputField fieldName="query" />
-          <CheckboxGroup>
-            {mockData.map((item) => (
-              <CustomCheckbox key={item.id} id={item.id} name={item.name} />
-            ))}
-          </CheckboxGroup>
+          <CustomTextInput
+            name="query"
+            placeholder="your search query..."
+            type="text"
+          />
+          <CheckBoxGroup values={values} />
           <button type="submit">Submit</button>
         </Form>
       )}

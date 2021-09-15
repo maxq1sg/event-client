@@ -1,13 +1,17 @@
 import { FC } from "react";
-import styled from "styled-components";
-
-const Title = styled.h2`
-  font-size: 2rem;
-  color: orange;
-`;
 
 const CustomTitle: FC = ({ children }) => {
-  return <Title>{children}</Title>;
+  return (
+    <>
+      <div className="title">{children}</div>
+      <style jsx>{`
+        .title {
+          font-size: 2rem;
+          color: orange;
+        }
+      `}</style>
+    </>
+  );
 };
 
 export default CustomTitle;

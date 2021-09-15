@@ -2,9 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
-const FlexContainer = styled.div`
-  display: flex;
-`;
+//todo - remove styled comp
 
 const CategoryName = styled.div`
   color: gray;
@@ -21,13 +19,20 @@ interface ImainInfoProps {
 
 const EventMainInfoFlex: FC<ImainInfoProps> = ({ infoType, infoContent }) => {
   return (
-    <FlexContainer>
-      <Image alt="url" src={`/svgs/ticket.svg}`} width="30" height="30" />
-      <div>
-        <CategoryName>{infoType}</CategoryName>
-        <InfoItem>{infoContent}</InfoItem>
+    <>
+      <div className="flex-container">
+        <Image alt="url" src={`/svgs/ticket.svg}`} width="30" height="30" />
+        <div>
+          <CategoryName>{infoType}</CategoryName>
+          <InfoItem>{infoContent}</InfoItem>
+        </div>
       </div>
-    </FlexContainer>
+      <style jsx>{`
+        .flex-container {
+          display: flex;
+        }
+      `}</style>
+    </>
   );
 };
 
