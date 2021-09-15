@@ -33,6 +33,7 @@ const SearchContainer = () => {
             setLoading(false);
           } catch (error) {
             //todo
+            setLoading(false);
             setError(handleAxiosError(error as AxiosError));
           }
         }}
