@@ -2,6 +2,6 @@ import { ICategory } from "./category";
 import { IEvent } from "./event";
 
 export interface IHomeContext {
-  categories: ICategory[];
+  categoryList: ICategory[];
   events: IEvent[];
 }

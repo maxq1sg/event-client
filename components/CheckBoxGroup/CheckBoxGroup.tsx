@@ -4,25 +4,24 @@ import { HomeContext } from "../../pages";
 import { ISearchInitValues } from "../../types/searchInitValues";
 
 const CheckBoxGroup: FC<{ values: ISearchInitValues }> = ({ values }) => {
-  const { categories } = useContext(HomeContext);
-
+  const { categoryList } = useContext(HomeContext);
   return (
     <FieldArray
-      name="categoryIds"
+      name="categories"
       render={(arrayHelpers) => (
         <div>
-          {categories?.map((category) => (
+          {categoryList?.map((category) => (
             <div key={category.id}>
               <label>
                 <input
                   name="categoryIds"
                   type="checkbox"
                   value={category.id}
-                  checked={values.categoryIds.includes(category.id)}
+                  checked={values.categories.includes(category.id)}
                   onChange={(e) => {
                     if (e.target.checked) arrayHelpers.push(category.id);
                     else {
-                      const idx = values.categoryIds.indexOf(category.id);
+                      const idx = values.categories.indexOf(category.id);
                       arrayHelpers.remove(idx);
                     }
                   }}
