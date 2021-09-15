@@ -1,3 +1,4 @@
+import { IconButton } from "@material-ui/core";
 import axios, { AxiosError } from "axios";
 import { Formik, Form } from "formik";
 import { useContext, useState } from "react";
@@ -8,7 +9,7 @@ import { ISearchInitValues } from "../../types/searchInitValues";
 import $api from "../../utils/api";
 import handleAxiosError from "../../utils/handleAxiosError";
 import CheckBoxGroup from "../CheckBoxGroup/CheckBoxGroup";
-import CustomTextInput from "../CustomTextInput/CustomTextInput";
+import CustomSearchInput from "../CustomTextInput/CustomTextInput";
 import SearchResults from "../SearchResults/SearchResults";
 
 const SearchContainer = () => {
@@ -25,27 +26,28 @@ const SearchContainer = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={async (values) => {
+          setSearchResults(null);
+          setError(null);
           try {
-            console.log(values);
             setLoading(true);
             const { data } = await $api.post("/api/events/search", values);
             setSearchResults(data);
             setLoading(false);
           } catch (error) {
             //todo
+            setLoading(false);
             setError(handleAxiosError(error as AxiosError));
           }
         }}
       >
         {({ values }) => (
           <Form>
-            <CustomTextInput
+            <CustomSearchInput
               name="query"
               placeholder="your search query..."
               type="text"
             />
             <CheckBoxGroup values={values} />
-            <button type="submit">Submit</button>
           </Form>
         )}
       </Formik>

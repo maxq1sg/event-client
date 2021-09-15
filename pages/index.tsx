@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { createContext } from "react";
+import CategoryGrid from "../components/CategoryGrid/CategoryGrid";
 import EventList from "../components/EventList/EventList";
 import Loader from "../components/Loader/Loader";
 import SearchContainer from "../components/SearchContainer/SearchContainer";
@@ -11,6 +12,7 @@ export const HomeContext = createContext<Partial<IHomeContext>>({});
 const Home: NextPage<IHomeContext> = ({ categoryList, events }) => {
   return (
     <HomeContext.Provider value={{ categoryList, events }}>
+      <CategoryGrid />
       <SearchContainer />
       {/* <EventList /> */}
     </HomeContext.Provider>

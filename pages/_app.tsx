@@ -1,7 +1,5 @@
-// import "../styles/global.css";
 import type { AppProps } from "next/app";
 import React from "react";
-// import { Head } from "next/document";
 import { ThemeProvider } from "styled-components";
 import { CssBaseline } from "@material-ui/core";
 

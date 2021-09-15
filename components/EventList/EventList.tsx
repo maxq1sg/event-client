@@ -5,7 +5,6 @@ import SingleEvent from "./SingleEvent";
 
 const EventList = () => {
   const { events } = useContext(HomeContext);
-  console.log(events);
   return (
     <GridContainer>
       {events?.map((event) => (
