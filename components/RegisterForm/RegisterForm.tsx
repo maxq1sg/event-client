@@ -6,9 +6,10 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { FC } from "react";
+import { Form } from "formik";
+import React, { FC } from "react";
 import LoginFormInput from "../LoginFormInput/LoginFormInput";
-//todo - lock icon , already an account
+
 const RegisterForm: FC = () => {
   return (
     <Container component="main" maxWidth="xs">
@@ -19,62 +20,37 @@ const RegisterForm: FC = () => {
           flexDirection: "column",
           alignItems: "center",
         }}
-      > 
+      >
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" sx={{ mt: 3 }}>
+        <Box component="div" sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
+              <LoginFormInput name="firstName" type="text" label="first name" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
+              <LoginFormInput name="lastName" type="text" label="last name" />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
+              <LoginFormInput name="email" type="text" label="email" />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
+              <LoginFormInput
                 name="password"
-                label="Password"
                 type="password"
-                id="password"
-                autoComplete="new-password"
+                label="password"
               />
-              {/* <LoginFormInput /> */}
+            </Grid>
+            <Grid item xs={12}>
+              <LoginFormInput
+                name="confirmPassword"
+                type="password"
+                label=" confirm password"
+              />
             </Grid>
           </Grid>
-          <Button
-          // type="submit"
-          // fullWidth
-          // variant="contained"
-          // sx={{ mt: 3, mb: 2 }}
-          >
+          <Button type="submit" fullWidth variant="outlined">
             Sign Up
           </Button>
         </Box>
@@ -82,4 +58,5 @@ const RegisterForm: FC = () => {
     </Container>
   );
 };
+
 export default RegisterForm;
