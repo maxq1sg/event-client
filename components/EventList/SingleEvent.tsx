@@ -11,7 +11,6 @@ interface SingleEventProps {
 
 //todo image adaptive
 const SingleEvent: FC<SingleEventProps> = ({ event }) => {
-  // console.log(convertDate(event.date));
   return (
     <>
       <div className="event-wrapper">

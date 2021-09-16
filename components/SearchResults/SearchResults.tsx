@@ -20,7 +20,6 @@ const SearchResults: FC<ISearchResultsProps> = ({
   loading,
   error,
 }) => {
-  console.log(searchResults, loading, error);
   return (
     <>
       {loading ? (
