@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { createContext, FC } from "react";
 import EventInfoSectiob from "../../components/EventInfoSection/EventInfoSection";
+import { ICategory } from "../../types/category";
 import { IEventsPerCategoryContext } from "../../types/contextes";
 import $api from "../../utils/api";
 
@@ -19,14 +20,16 @@ const SingleEventPage: FC<IEventsPerCategoryContext> = ({ events }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { category } = ctx.query;
-  const { data: categoryId } = await $api.get(
+  const { data } = await $api.get<ICategory>(
     `/api/category/single?name=${category}`
   );
-  const events={categoryId}
+  const { data:events } = await $api.get(
+    `/api/events?category=${data.id}&limit=4&page=1`
+  );
 
   return {
     props: {
-      events,
+      events
     },
   };
 };

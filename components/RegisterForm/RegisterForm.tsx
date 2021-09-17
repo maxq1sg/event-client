@@ -7,10 +7,17 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Form } from "formik";
-import React, { FC } from "react";
+import Image from "next/image";
+import React, { Dispatch, FC, SetStateAction } from "react";
+import FileUpload from "../FileUpload/FileUpload";
 import LoginFormInput from "../LoginFormInput/LoginFormInput";
 
-const RegisterForm: FC = () => {
+interface RegisterFormProps {
+  setFiles: Dispatch<SetStateAction<any>>;
+  files: File | null;
+}
+
+const RegisterForm: FC<RegisterFormProps> = ({ setFiles, files }) => {
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -50,11 +57,25 @@ const RegisterForm: FC = () => {
               />
             </Grid>
           </Grid>
-          <Button type="submit" fullWidth variant="outlined">
+          <FileUpload accept="image/*" setFiles={setFiles}>
+            <Image alt="upload" src="/svgs/upload.svg" width={40} height={40} />
+            <div>{files?.name}</div>
+          </FileUpload>
+          <Button
+            className="button"
+            type="submit"
+            fullWidth
+            variant="contained"
+          >
             Sign Up
           </Button>
         </Box>
       </Box>
+      <style jsx>{`
+        .button {
+          margin-top: 56px;
+        }
+      `}</style>
     </Container>
   );
 };

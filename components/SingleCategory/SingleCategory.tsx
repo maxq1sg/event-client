@@ -13,7 +13,6 @@ const SingleCategory: FC<ISingleCategory> = ({ category }) => {
   const redirectHandler = () => {
     router.push({
       pathname: `/events/${category.name.toLowerCase()}`,
-      query: { id: category.id },
     });
   };
   return (

@@ -1,7 +1,7 @@
 export const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  firstName: "maxim",
+  lastName: "bernadskiy",
+  email: "maximb00131516@gmail.com",
+  password: "12345",
+  confirmPassword: "12345",
 };
