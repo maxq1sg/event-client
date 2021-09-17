@@ -14,7 +14,7 @@ import LoginFormInput from "../LoginFormInput/LoginFormInput";
 
 interface RegisterFormProps {
   setFiles: Dispatch<SetStateAction<any>>;
-  files: File | null;
+  files: any[];
 }
 
 const RegisterForm: FC<RegisterFormProps> = ({ setFiles, files }) => {
@@ -59,7 +59,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ setFiles, files }) => {
           </Grid>
           <FileUpload accept="image/*" setFiles={setFiles}>
             <Image alt="upload" src="/svgs/upload.svg" width={40} height={40} />
-            <div>{files?.name}</div>
+            <div>{files && files[0]?.name}</div>
           </FileUpload>
           <Button
             className="button"

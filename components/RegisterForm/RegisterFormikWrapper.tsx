@@ -12,7 +12,7 @@ type obj = {
 
 //todo - lock icon , already an account
 const RegisterFormikWrapper: FC = () => {
-  const [files, setFiles] = useState<File | null>(null);
+  const [files, setFiles] = useState<any>(null);
 
   return (
     <Formik
@@ -23,12 +23,14 @@ const RegisterFormikWrapper: FC = () => {
         for (const field in values) {
           formData.append(field, values[field]);
         }
-        formData.append("file", files as File);
         formData.append("type", "users");
+
+        formData.append("file", files && files[0]);
         try {
           const { data } = await $api.post("api/auth/register", formData);
-          console.log(data);
-        } catch (error) {}
+        } catch (error) {
+          console.log(error);
+        }
       }}
     >
       {({ values }) => (
