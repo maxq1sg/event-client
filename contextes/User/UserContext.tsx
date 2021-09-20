@@ -1,8 +1,6 @@
 import { createContext, FC, useContext, useReducer } from "react";
 import {
-  EUserActionType,
   IUserContext,
-  IUserPayload,
 } from "./types";
 import { userReducer } from "./UserReducer";
 

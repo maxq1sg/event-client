@@ -6,7 +6,7 @@ const GridContainer: FC = ({ children }) => {
       <div className="container">{children}</div>{" "}
       <style jsx>{`
         .container {
-          background: gray;
+          background: #ede7e6;
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 12px;

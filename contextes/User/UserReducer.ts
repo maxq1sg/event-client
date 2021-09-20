@@ -9,7 +9,7 @@ export const userReducer = (state: IUserContext, action: any): IUserContext => {
     case EUserActionType.AUTH_USER_ERROR:
       return { ...state, error: action.payload, loading: false };
     case EUserActionType.AUTH_USER_RESET:
-      return {...state, data: null, error: null, loading: false };
+      return { ...state, data: null, error: null, loading: false };
     default:
       return state;
   }

@@ -1,14 +1,8 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  TextField,
-  Typography,
-} from "@material-ui/core";
-import { Form } from "formik";
+import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import Image from "next/image";
 import React, { Dispatch, FC, SetStateAction } from "react";
+import { useUser } from "../../contextes/User/UserContext";
 import FileUpload from "../FileUpload/FileUpload";
 import LoginFormInput from "../LoginFormInput/LoginFormInput";
 
@@ -18,6 +12,8 @@ interface RegisterFormProps {
 }
 
 const RegisterForm: FC<RegisterFormProps> = ({ setFiles, files }) => {
+  const { error, loading } = useUser();
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -67,10 +63,11 @@ const RegisterForm: FC<RegisterFormProps> = ({ setFiles, files }) => {
             fullWidth
             variant="contained"
           >
-            Sign Up
+            {loading ? "Loading..." : "Sign Up"}
           </Button>
         </Box>
       </Box>
+      {error ? <Alert severity="error">{error.message}</Alert> : null}
       <style jsx>{`
         .button {
           margin-top: 56px;

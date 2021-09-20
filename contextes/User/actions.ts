@@ -1,4 +1,4 @@
-import { IError } from "./../../types/error";
+import { IError } from "../../types/error";
 import { EUserActionType, IUserPayload } from "./types";
 
 export interface IAuthUserRequest {

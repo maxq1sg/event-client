@@ -6,6 +6,7 @@ const CustomTitle: FC = ({ children }) => {
       <div className="title">{children}</div>
       <style jsx>{`
         .title {
+          padding: 0 10px;
           font-size: 2rem;
           color: orange;
         }

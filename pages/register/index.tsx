@@ -1,12 +1,12 @@
 import React from "react";
-import RegisterForm from "../../components/RegisterForm/RegisterForm";
 import RegisterFormikWrapper from "../../components/RegisterForm/RegisterFormikWrapper";
+import MainLayout from "../../layout/Layout";
 
 const RegisterPage = () => {
   return (
-    <div>
+    <MainLayout title="Registration">
       <RegisterFormikWrapper />
-    </div>
+    </MainLayout>
   );
 };
 

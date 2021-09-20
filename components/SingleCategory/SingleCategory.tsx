@@ -1,4 +1,4 @@
-import { useRouter } from "next/dist/client/router";
+import Router from "next/dist/client/router";
 import Image from "next/image";
 import { FC, MouseEvent } from "react";
 import { ICategory } from "../../types/category";
@@ -8,10 +8,9 @@ interface ISingleCategory {
 }
 
 const SingleCategory: FC<ISingleCategory> = ({ category }) => {
-  const router = useRouter();
   
   const redirectHandler = () => {
-    router.push({
+    Router.push({
       pathname: `/events/${category.name.toLowerCase()}`,
     });
   };

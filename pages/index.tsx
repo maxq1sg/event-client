@@ -1,26 +1,37 @@
 import type { NextPage } from "next";
-import { createContext } from "react";
-import CategoryGrid from "../components/CategoryGrid/CategoryGrid";
+import { createContext, useEffect, useState } from "react";
 import EventList from "../components/EventList/EventList";
-import Loader from "../components/Loader/Loader";
-import SearchContainer from "../components/SearchContainer/SearchContainer";
+import { useEventList } from "../contextes/Event/EventListContext";
+import { EEventListActionType } from "../contextes/Event/types";
+import MainLayout from "../layout/Layout";
 import { IHomeContext } from "../types/contextes";
+import { IEvent } from "../types/event";
 import $api from "../utils/api";
 
 export const HomeContext = createContext<Partial<IHomeContext>>({});
 
 const Home: NextPage<IHomeContext> = ({ categoryList, events }) => {
+  const { dispatch } = useEventList();
+  const [notFirstRender, setNotFirstRender] = useState(false);
+  useEffect(() => {
+    dispatch({ type: EEventListActionType.EVET_LIST_SUCCESS, payload: events });
+    setNotFirstRender(true);
+  }, [dispatch, events]);
+
   return (
-    <HomeContext.Provider value={{ categoryList, events }}>
-      <CategoryGrid />
-      <SearchContainer />
-      {/* <EventList /> */}
-    </HomeContext.Provider>
+    <MainLayout title="events">
+      {notFirstRender ? (
+        <HomeContext.Provider value={{ categoryList }}>
+          <EventList />
+        </HomeContext.Provider>
+      ) : null}
+    </MainLayout>
   );
 };
 export async function getServerSideProps() {
   const { data: categoryList } = await $api.get("/api/category");
-  const { data: events } = await $api.get("/api/events?page=1&limit=5");
+
+  const { data: events } = await $api.get<IEvent[]>("/api/events?limit=5");
   return {
     props: {
       categoryList,

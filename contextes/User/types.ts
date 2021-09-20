@@ -1,4 +1,4 @@
-import { IUser } from "./../../types/user";
+import { IUser } from "../../types/user";
 import { IError } from "../../types/error";
 import { IAuthActions } from "./actions";
 import { Dispatch } from "react";

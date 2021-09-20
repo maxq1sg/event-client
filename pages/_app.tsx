@@ -1,8 +1,8 @@
 import type { AppProps } from "next/app";
 import React from "react";
-import { ThemeProvider } from "styled-components";
 import { CssBaseline } from "@material-ui/core";
-import UserProvider, { UserContext } from "../contextes/User/UserContext";
+import UserProvider from "../contextes/User/UserContext";
+import EventProvider from "../contextes/Event/EventListContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
@@ -15,8 +15,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <UserProvider>
-        <CssBaseline />
-        <Component {...pageProps} />
+        <EventProvider>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </EventProvider>
       </UserProvider>
     </>
   );

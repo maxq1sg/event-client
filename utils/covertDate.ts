@@ -8,5 +8,5 @@ export default function convertDate(date: Date) {
     hour:"numeric",
     minute:"numeric"
   };
-  return new Intl.DateTimeFormat('en-US', dateOptions)
+  return new Intl.DateTimeFormat('en-US', dateOptions).format()
 }

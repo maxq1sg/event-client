@@ -1,6 +1,5 @@
 import { GetServerSideProps } from "next";
 import { createContext, FC } from "react";
-import EventInfoSectiob from "../../components/EventInfoSection/EventInfoSection";
 import { ICategory } from "../../types/category";
 import { IEventsPerCategoryContext } from "../../types/contextes";
 import $api from "../../utils/api";
@@ -10,7 +9,6 @@ export const EventCategoryContext = createContext<
 >({});
 
 const SingleEventPage: FC<IEventsPerCategoryContext> = ({ events }) => {
-  console.log(events);
   return (
     <EventCategoryContext.Provider value={{ events }}>
       <div>maxim</div>

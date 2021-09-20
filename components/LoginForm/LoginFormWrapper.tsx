@@ -1,8 +1,9 @@
 import { AxiosError } from "axios";
 import { Form, Formik } from "formik";
-import React, { FC, useContext, useEffect } from "react";
+import Router from "next/dist/client/router";
+import React, { FC, useEffect } from "react";
 import { EUserActionType } from "../../contextes/User/types";
-import { UserContext, useUser } from "../../contextes/User/UserContext";
+import { useUser } from "../../contextes/User/UserContext";
 import $api from "../../utils/api";
 import handleAxiosError from "../../utils/handleAxiosError";
 import LoginForm from "./LoginForm";
@@ -11,7 +12,6 @@ import { initialValues } from "./validation/initialValues";
 
 const LoginFormikWrapper: FC = () => {
   const { dispatch, data, error, loading } = useUser();
-
   useEffect(() => {
     console.log(data, error, loading);
   }, [data, error, loading]);
@@ -25,6 +25,7 @@ const LoginFormikWrapper: FC = () => {
           dispatch({ type: EUserActionType.AUTH_USER_REQUEST });
           const { data } = await $api.post("api/auth/login", values);
           dispatch({ type: EUserActionType.AUTH_USER_SUCCESS, payload: data });
+          Router.push("/");
         } catch (error) {
           dispatch({
             type: EUserActionType.AUTH_USER_ERROR,
@@ -33,11 +34,9 @@ const LoginFormikWrapper: FC = () => {
         }
       }}
     >
-      {() => (
         <Form>
           <LoginForm />
         </Form>
-      )}
     </Formik>
   );
 };

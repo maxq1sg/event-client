@@ -2,31 +2,52 @@ import React, { FC } from "react";
 import { IEvent } from "../../types/event";
 import Image from "next/image";
 import CustomTitle from "../CustomTitle/CustomTitle";
-import styled from "styled-components";
-import DateSection from "../DateSection/DateSection";
-import convertDate from "../../utils/covertDate";
+import { Button, Card, CardActions } from "@material-ui/core";
+import Router from "next/dist/client/router";
+
 interface SingleEventProps {
   event: IEvent;
 }
 
 //todo image adaptive
 const SingleEvent: FC<SingleEventProps> = ({ event }) => {
+  const buttonClickHandler = (id: number) => {
+    Router.push(`/events/list/${id}`);
+  };
+
+  const src = `http://localhost:4000/static/${event.preview?.path}`;
+
   return (
     <>
-      <div className="event-wrapper">
+      <Card>
         <Image
-          src="/preview/test.jpg"
+          loader={() => src}
+          src={src}
+          width={100}
+          height={100}
           alt="event-preview"
-          width="200"
-          height="200"
         />
         {/* <DateSection>
       </DateSection> */}
         <CustomTitle>{event.name}</CustomTitle>
-      </div>
+
+        <CardActions>
+          <Button
+            onClick={() => buttonClickHandler(event.id)}
+            size="small"
+            color="primary"
+          >
+            more info
+          </Button>
+        </CardActions>
+      </Card>
       <style jsx>{`
         .event-wrapper {
           background: white;
+          color: red;
+        }
+        .image-wrapper {
+          max-height: 130px;
         }
       `}</style>
     </>

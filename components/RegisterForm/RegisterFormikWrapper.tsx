@@ -1,26 +1,27 @@
+import { AxiosError } from "axios";
 import { Form, Formik } from "formik";
-import React, { FC, useEffect, useState } from "react";
+import Router from "next/dist/client/router";
+import React, { FC, useState } from "react";
+import { EUserActionType } from "../../contextes/User/types";
 import { useUser } from "../../contextes/User/UserContext";
+import { iterableObject } from "../../types/iterableObject";
 import $api from "../../utils/api";
-import LoginFormInput from "../LoginFormInput/LoginFormInput";
+import handleAxiosError from "../../utils/handleAxiosError";
 import RegisterForm from "./RegisterForm";
 import { ValidationSchema } from "./validation";
 import { initialValues } from "./validation/initialValues";
 
-type obj = {
-  [key: string]: string;
-};
-
 //todo - lock icon , already an account
+
 const RegisterFormikWrapper: FC = () => {
   const [files, setFiles] = useState<any>(null);
-  const { data, error, loading, dispatch } = useUser();
-  console.log(data, error, loading, dispatch);
+  const { dispatch } = useUser();
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={ValidationSchema}
-      onSubmit={async (values: obj) => {
+      onSubmit={async (values: iterableObject) => {
         const formData = new FormData();
         for (const field in values) {
           formData.append(field, values[field]);
@@ -29,17 +30,21 @@ const RegisterFormikWrapper: FC = () => {
 
         formData.append("file", files && files[0]);
         try {
-          const { data } = await $api.post("api/auth/register", formData);
+          dispatch({ type: EUserActionType.AUTH_USER_REQUEST });
+          const { data } = await $api.post("api/auth/register", values);
+          dispatch({ type: EUserActionType.AUTH_USER_SUCCESS, payload: data });
+          Router.push("/");
         } catch (error) {
-          console.log(error);
+          dispatch({
+            type: EUserActionType.AUTH_USER_ERROR,
+            payload: handleAxiosError(error as AxiosError),
+          });
         }
       }}
     >
-      {({ values }) => (
-        <Form>
-          <RegisterForm setFiles={setFiles} files={files} />
-        </Form>
-      )}
+      <Form>
+        <RegisterForm setFiles={setFiles} files={files} />
+      </Form>
     </Formik>
   );
 };
