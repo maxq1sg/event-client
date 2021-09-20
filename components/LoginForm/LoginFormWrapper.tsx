@@ -1,17 +1,20 @@
+import { AxiosError } from "axios";
 import { Form, Formik } from "formik";
 import React, { FC, useContext, useEffect } from "react";
-import { UserContext } from "../../contextes/UserContext";
+import { EUserActionType } from "../../contextes/User/types";
+import { UserContext, useUser } from "../../contextes/User/UserContext";
 import $api from "../../utils/api";
+import handleAxiosError from "../../utils/handleAxiosError";
 import LoginForm from "./LoginForm";
 import { LoginValidationSchema } from "./validation";
 import { initialValues } from "./validation/initialValues";
 
 const LoginFormikWrapper: FC = () => {
-  const { data: userData, error:loginError, loading } = useContext(UserContext);
+  const { dispatch, data, error, loading } = useUser();
 
   useEffect(() => {
-    console.log(userData, loginError, loading);
-  }, [userData, loginError, loading]);
+    console.log(data, error, loading);
+  }, [data, error, loading]);
 
   return (
     <Formik
@@ -19,10 +22,14 @@ const LoginFormikWrapper: FC = () => {
       validationSchema={LoginValidationSchema}
       onSubmit={async (values) => {
         try {
+          dispatch({ type: EUserActionType.AUTH_USER_REQUEST });
           const { data } = await $api.post("api/auth/login", values);
-          console.log(data);
+          dispatch({ type: EUserActionType.AUTH_USER_SUCCESS, payload: data });
         } catch (error) {
-          console.log(error);
+          dispatch({
+            type: EUserActionType.AUTH_USER_ERROR,
+            payload: handleAxiosError(error as AxiosError),
+          });
         }
       }}
     >

@@ -1,10 +1,11 @@
 import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import { FC } from "react";
+import { useUser } from "../../contextes/User/UserContext";
 import LoginFormInput from "../LoginFormInput/LoginFormInput";
 
-
-
 const LoginForm: FC = () => {
+  const { data, error, loading } = useUser();
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -37,8 +38,9 @@ const LoginForm: FC = () => {
             fullWidth
             variant="contained"
           >
-            Sign In
+            {loading ? "Loading..." : "Sign in"}
           </Button>
+          {error ? <Alert severity="error">{error?.message}</Alert> : null}
         </Box>
       </Box>
       <style jsx>{`

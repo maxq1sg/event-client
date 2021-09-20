@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { CssBaseline } from "@material-ui/core";
-import { UserContext } from "../contextes/UserContext";
+import UserProvider, { UserContext } from "../contextes/User/UserContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
@@ -14,10 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
   return (
     <>
-      <UserContext.Provider value={{ data: null, error: "", loading: true }}>
+      <UserProvider>
         <CssBaseline />
         <Component {...pageProps} />
-      </UserContext.Provider>
+      </UserProvider>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
 import React, { FC, useEffect, useState } from "react";
+import { useUser } from "../../contextes/User/UserContext";
 import $api from "../../utils/api";
 import LoginFormInput from "../LoginFormInput/LoginFormInput";
 import RegisterForm from "./RegisterForm";
@@ -13,7 +14,8 @@ type obj = {
 //todo - lock icon , already an account
 const RegisterFormikWrapper: FC = () => {
   const [files, setFiles] = useState<any>(null);
-
+  const { data, error, loading, dispatch } = useUser();
+  console.log(data, error, loading, dispatch);
   return (
     <Formik
       initialValues={initialValues}
