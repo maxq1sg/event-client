@@ -18,6 +18,7 @@ export const eventListReducer = (
       return {
         ...state,
         data: state?.data?.concat(action.payload) as IEventListPayload,
+        loading: false,
       };
     case EEventListActionType.EVET_LIST_ERROR:
       return { ...state, error: action.payload, loading: false };

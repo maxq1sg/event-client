@@ -14,7 +14,8 @@ const SingleEvent: FC<SingleEventProps> = ({ event }) => {
   const buttonClickHandler = (id: number) => {
     Router.push(`/events/list/${id}`);
   };
-
+  
+  //todo
   const pathOnServer = event.preview?.path;
   const src = `http://localhost:4000/static/${
     pathOnServer ? pathOnServer : "/events/default.png"

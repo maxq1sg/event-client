@@ -17,7 +17,7 @@ const LoginForm: FC = () => {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign in
         </Typography>
         <Box component="div" sx={{ mt: 3 }}>
           <Grid container spacing={2}>

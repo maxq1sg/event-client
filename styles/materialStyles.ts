@@ -6,6 +6,11 @@ const useStyles = makeStyles(() => ({
   "incorrect-input": {
     borderBottom: "0.7px solid red",
   },
+
+  "flex-container": {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 }));
 
 export default useStyles;

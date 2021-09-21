@@ -1,3 +1,4 @@
+import axios from "axios";
 import type { NextPage } from "next";
 import { createContext, useEffect, useState } from "react";
 import EventList from "../components/EventList/EventList";
@@ -18,10 +19,16 @@ const Home: NextPage<IHomeContext> = ({ categoryList, events }) => {
     dispatch({ type: EEventListActionType.EVET_LIST_SUCCESS, payload: events });
     setNotFirstRender(true);
   }, [dispatch, events]);
-  const { data } = useUser();
-  console.log(data);
+
   return (
     <MainLayout title="events">
+      <button
+        onClick={() => {
+          axios.get("/hello").then((data) => console.log(data));
+        }}
+      >
+        max
+      </button>
       {notFirstRender ? (
         <HomeContext.Provider value={{ categoryList }}>
           <EventList />
@@ -33,7 +40,9 @@ const Home: NextPage<IHomeContext> = ({ categoryList, events }) => {
 export async function getServerSideProps() {
   const { data: categoryList } = await $api.get("/api/category");
 
-  const { data: events } = await $api.get<IEvent[]>("/api/events?limit=5");
+  const { data: events } = await $api.get<IEvent[]>(
+    "/api/events?limit=5&page=1"
+  );
   return {
     props: {
       categoryList,

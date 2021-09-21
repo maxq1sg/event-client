@@ -1,15 +1,12 @@
-import { Container } from "@material-ui/core";
 import Head from "next/head";
 import { FC } from "react";
 import Navbar from "../components/Navbar/Navbar";
-import { useUser } from "../contextes/User/UserContext";
 
 interface MainLayoutProps {
   title: string;
 }
 
 const MainLayout: FC<MainLayoutProps> = ({ children, title }) => {
-  const { data } = useUser();
   return (
     <>
       <Head>

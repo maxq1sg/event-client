@@ -1,20 +1,17 @@
-import { CircularProgress } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import React, { FC } from "react";
 import { IError } from "../../types/error";
 import { IEvent } from "../../types/event";
-import { EMessage } from "../../types/message";
 import SingleEvent from "../EventList/SingleEvent";
 import GridContainer from "../GridContainer/GridContainer";
 import Loader from "../Loader/Loader";
-import Message from "../Message/Message";
 
 interface ISearchResultsProps {
   searchResults: IEvent[] | null;
   loading: boolean;
   error: IError | null;
 }
-
+//todo ternar
 const SearchResults: FC<ISearchResultsProps> = ({
   searchResults,
   loading,
@@ -37,7 +34,7 @@ const SearchResults: FC<ISearchResultsProps> = ({
             <SingleEvent key={event.id} event={event} />
           ))}
         </GridContainer>
-      ) : searchResults?.length === 0 ? (
+      ) : searchResults?.length ? (
         <Alert severity="info">Nothing found on your search query</Alert>
       ) : null}
     </>

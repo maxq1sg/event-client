@@ -12,9 +12,7 @@ import { initialValues } from "./validation/initialValues";
 
 const LoginFormikWrapper: FC = () => {
   const { dispatch, data, error, loading } = useUser();
-  useEffect(() => {
-    console.log(data, error, loading);
-  }, [data, error, loading]);
+
 
   return (
     <Formik

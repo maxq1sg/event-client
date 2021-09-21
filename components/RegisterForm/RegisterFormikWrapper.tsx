@@ -11,7 +11,7 @@ import RegisterForm from "./RegisterForm";
 import { ValidationSchema } from "./validation";
 import { initialValues } from "./validation/initialValues";
 
-//todo - lock icon , already an account
+//todo any
 
 const RegisterFormikWrapper: FC = () => {
   const [files, setFiles] = useState<any>(null);

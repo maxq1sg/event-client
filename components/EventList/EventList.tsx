@@ -54,7 +54,8 @@ const EventList = () => {
           <SingleEvent key={event.id} event={event} />
         ))}
       </GridContainer>
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
+      {error ? <Alert severity="error">{error.message}</Alert> : null}
       <div className="observer-item" ref={ref}></div>
       {isLimit && <Alert severity="info">You have shown all events!</Alert>}
 

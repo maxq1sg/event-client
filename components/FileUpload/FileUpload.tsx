@@ -6,6 +6,7 @@ interface IFileUploadProps {
   setFiles: Dispatch<SetStateAction<any>>;
 }
 
+//todo
 const FileUpload: FC<IFileUploadProps> = ({ accept, setFiles, children }) => {
   const input = useRef<HTMLInputElement>(null);
   return (

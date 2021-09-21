@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+
+//todo vars
 const GridContainer: FC = ({ children }) => {
   return (
     <>
