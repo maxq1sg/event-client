@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import EventList from "../components/EventList/EventList";
 import { useEventList } from "../contextes/Event/EventListContext";
 import { EEventListActionType } from "../contextes/Event/types";
+import { useUser } from "../contextes/User/UserContext";
 import MainLayout from "../layout/Layout";
 import { IHomeContext } from "../types/contextes";
 import { IEvent } from "../types/event";
@@ -17,7 +18,8 @@ const Home: NextPage<IHomeContext> = ({ categoryList, events }) => {
     dispatch({ type: EEventListActionType.EVET_LIST_SUCCESS, payload: events });
     setNotFirstRender(true);
   }, [dispatch, events]);
-
+  const { data } = useUser();
+  console.log(data);
   return (
     <MainLayout title="events">
       {notFirstRender ? (

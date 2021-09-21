@@ -15,7 +15,10 @@ const SingleEvent: FC<SingleEventProps> = ({ event }) => {
     Router.push(`/events/list/${id}`);
   };
 
-  const src = `http://localhost:4000/static/${event.preview?.path}`;
+  const pathOnServer = event.preview?.path;
+  const src = `http://localhost:4000/static/${
+    pathOnServer ? pathOnServer : "/events/default.png"
+  }`;
 
   return (
     <>
@@ -23,9 +26,10 @@ const SingleEvent: FC<SingleEventProps> = ({ event }) => {
         <Image
           loader={() => src}
           src={src}
-          width={100}
+          width={200}
           height={100}
           alt="event-preview"
+          unoptimized
         />
         {/* <DateSection>
       </DateSection> */}

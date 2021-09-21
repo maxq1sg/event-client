@@ -25,6 +25,7 @@ const LoginFormikWrapper: FC = () => {
           dispatch({ type: EUserActionType.AUTH_USER_REQUEST });
           const { data } = await $api.post("api/auth/login", values);
           dispatch({ type: EUserActionType.AUTH_USER_SUCCESS, payload: data });
+          localStorage.setItem("user", JSON.stringify(data));
           Router.push("/");
         } catch (error) {
           dispatch({
@@ -34,9 +35,9 @@ const LoginFormikWrapper: FC = () => {
         }
       }}
     >
-        <Form>
-          <LoginForm />
-        </Form>
+      <Form>
+        <LoginForm />
+      </Form>
     </Formik>
   );
 };
