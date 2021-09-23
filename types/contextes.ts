@@ -5,6 +5,13 @@ export interface IHomeContext {
   categoryList: ICategory[];
   events: IEvent[];
 }
+
+
 export interface IEventsPerCategoryContext {
   events: IEvent[];
+}
+
+
+export interface ISearchPageContext {
+  categoryList: ICategory[];
 }

@@ -14,26 +14,13 @@ const SingleEvent: FC<SingleEventProps> = ({ event }) => {
   const buttonClickHandler = (id: number) => {
     Router.push(`/events/list/${id}`);
   };
-  
-  //todo
-  const pathOnServer = event.preview?.path;
-  const src = `http://localhost:4000/static/${
-    pathOnServer ? pathOnServer : "/events/default.png"
-  }`;
 
+  const pathOnServer = event.preview?.path;
+  const src = `/static${pathOnServer ? pathOnServer : "/events/default.png"}`;
   return (
     <>
       <Card>
-        <Image
-          loader={() => src}
-          src={src}
-          width={200}
-          height={100}
-          alt="event-preview"
-          unoptimized
-        />
-        {/* <DateSection>
-      </DateSection> */}
+        <Image src={src} width={200} height={100} alt="event-preview" />
         <CustomTitle>{event.name}</CustomTitle>
 
         <CardActions>

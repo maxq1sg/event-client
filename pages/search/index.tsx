@@ -1,18 +1,27 @@
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import { createContext, FC } from "react";
 import SearchContainer from "../../components/SearchContainer/SearchContainer";
+import { ISearchPageContext } from "../../types/contextes";
+import $api from "../../utils/api";
 
-const SearchPage = () => {
+export const SearchPageContext = createContext<Partial<ISearchPageContext>>({});
+
+const SearchPage: NextPage<ISearchPageContext> = ({ categoryList }) => {
   return (
-    <div>
+    <SearchPageContext.Provider value={{ categoryList }}>
       <SearchContainer />
-    </div>
+    </SearchPageContext.Provider>
   );
 };
 
-// export const getServerSideProps:GetServerSideProps=()=>{
-//     return {
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data: categoryList } = await $api.get("/api/category");
 
-//     }
-// }
+  return {
+    props: {
+      categoryList,
+    },
+  };
+};
 
 export default SearchPage;

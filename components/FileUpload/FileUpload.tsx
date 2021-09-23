@@ -6,23 +6,21 @@ interface IFileUploadProps {
   setFiles: Dispatch<SetStateAction<any>>;
 }
 
-//todo
 const FileUpload: FC<IFileUploadProps> = ({ accept, setFiles, children }) => {
-  const input = useRef<HTMLInputElement>(null);
   return (
-    <div onClick={() => input?.current?.click()}>
+    <label>
       <input
-        ref={input}
+        // ref={input}
         style={{ display: "none" }}
         type="file"
         name="files"
         accept={accept}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setFiles(e.target.files)
+          setFiles(e.target.files&&e.target.files[0])
         }
       />
       {children}
-    </div>
+    </label>
   );
 };
 

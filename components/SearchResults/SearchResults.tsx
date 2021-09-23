@@ -11,33 +11,37 @@ interface ISearchResultsProps {
   loading: boolean;
   error: IError | null;
 }
-//todo ternar
 const SearchResults: FC<ISearchResultsProps> = ({
   searchResults,
   loading,
   error,
 }) => {
+  if (loading) {
+    return <Loader />;
+  }
+  if (error) {
+    return (
+      <Alert severity="error">
+        <AlertTitle>{error.message}</AlertTitle>
+        {error?.body?.map((err) => (
+          <div key={err.param}>{err.msg}</div>
+        ))}
+      </Alert>
+    );
+  }
+  if (!searchResults) {
+    return <Alert severity="info">Type something to search!</Alert>;
+  }
+  console.log(searchResults?.length);
+  if (!searchResults?.length) {
+    return <Alert severity="info">Nothing found on your search query</Alert>;
+  }
   return (
-    <>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Alert severity="error">
-          <AlertTitle>{error.message}</AlertTitle>
-          {error?.body?.map((err) => (
-            <div key={err.param}>{err.msg}</div>
-          ))}
-        </Alert>
-      ) : searchResults?.length ? (
-        <GridContainer>
-          {searchResults?.map((event) => (
-            <SingleEvent key={event.id} event={event} />
-          ))}
-        </GridContainer>
-      ) : searchResults?.length ? (
-        <Alert severity="info">Nothing found on your search query</Alert>
-      ) : null}
-    </>
+    <GridContainer>
+      {searchResults?.map((event) => (
+        <SingleEvent key={event.id} event={event} />
+      ))}
+    </GridContainer>
   );
 };
 

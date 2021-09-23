@@ -15,7 +15,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       jssStyles?.parentElement?.removeChild(jssStyles);
     }
   }, []);
-  console.log(pageProps)
   return (
     <>
       <UserProvider>

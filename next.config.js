@@ -8,9 +8,11 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/hello",
-        destination: "http://localhost:4000/api/events",
+        source: "/static/:slug*",
+        destination: "http://localhost:4000/static/:slug*",
       },
     ];
   },
 };
+
+module.exports = nextConfig;

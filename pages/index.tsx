@@ -22,13 +22,6 @@ const Home: NextPage<IHomeContext> = ({ categoryList, events }) => {
 
   return (
     <MainLayout title="events">
-      <button
-        onClick={() => {
-          axios.get("/hello").then((data) => console.log(data));
-        }}
-      >
-        max
-      </button>
       {notFirstRender ? (
         <HomeContext.Provider value={{ categoryList }}>
           <EventList />

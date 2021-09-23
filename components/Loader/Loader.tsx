@@ -1,7 +1,6 @@
 import { CircularProgress } from "@material-ui/core";
 import React from "react";
 
-//todo make loader
 const Loader = () => {
   return (
     <>

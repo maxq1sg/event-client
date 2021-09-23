@@ -1,7 +1,7 @@
 import { IconButton } from "@material-ui/core";
 import axios, { AxiosError } from "axios";
 import { Formik, Form } from "formik";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HomeContext } from "../../pages";
 import { IError } from "../../types/error";
 import { IEvent } from "../../types/event";
@@ -21,6 +21,9 @@ const SearchContainer = () => {
     query: "",
     categories: [],
   };
+  // useEffect(() => {
+  //   console.log(searchResults, loading, error);
+  // }, [searchResults, loading, error]);
   return (
     <>
       <Formik
