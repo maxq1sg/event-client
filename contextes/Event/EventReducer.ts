@@ -1,3 +1,4 @@
+import { IEventListActions } from "./actions";
 import {
   EEventListActionType,
   IEventListContext,
@@ -6,7 +7,7 @@ import {
 
 export const eventListReducer = (
   state: IEventListContext,
-  action: any
+  action: IEventListActions
 ): IEventListContext => {
   switch (action.type) {
     case EEventListActionType.EVET_LIST_REQUEST:

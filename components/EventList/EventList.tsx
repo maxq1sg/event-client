@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useEventList } from "../../contextes/Event/EventListContext";
 import { EEventListActionType } from "../../contextes/Event/types";
@@ -27,23 +27,24 @@ const EventList = () => {
 
   useEffect(() => {
     (async () => {
-      if (page !== 1) {
-        try {
-          dispatch({ type: EEventListActionType.EVET_LIST_REQUEST });
-          const { data } = await $api.get(`api/events?limit=5&page=${page}`);
-          if (!data?.length) {
-            setIsLimit(true);
-          }
-          dispatch({
-            type: EEventListActionType.EVENT_LIST_ADD_ITEMS,
-            payload: data,
-          });
-        } catch (error) {
-          dispatch({
-            type: EEventListActionType.EVET_LIST_ERROR,
-            payload: handleAxiosError(error as AxiosError),
-          });
+      if (page === 1) {
+        return;
+      }
+      try {
+        dispatch({ type: EEventListActionType.EVET_LIST_REQUEST });
+        const { data } = await $api.get(`api/events?limit=5&page=${page}`);
+        if (!data?.length) {
+          setIsLimit(true);
         }
+        dispatch({
+          type: EEventListActionType.EVENT_LIST_ADD_ITEMS,
+          payload: data,
+        });
+      } catch (error) {
+        dispatch({
+          type: EEventListActionType.EVET_LIST_ERROR,
+          payload: handleAxiosError(error as AxiosError),
+        });
       }
     })();
   }, [page, dispatch]);

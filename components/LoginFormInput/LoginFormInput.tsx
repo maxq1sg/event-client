@@ -1,7 +1,6 @@
-import { IconButton, InputBase, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { ErrorMessage, useField } from "formik";
 import { FC } from "react";
-import Image from "next/image";
 import useStyles from "../../styles/materialStyles";
 import ErrorTextMessage from "./ErrorMessage";
 

@@ -15,6 +15,6 @@
     "downlevelIteration": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js", "components/DatePicker/DatePicker.jsx"],
   "exclude": ["node_modules"]
 }

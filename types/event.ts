@@ -4,7 +4,7 @@ export interface IEvent {
   id: number;
   name: string;
   description?: string;
-  date?: Date;
+  date: Date;
   users: IUser[];
   category?: {
     name: string;

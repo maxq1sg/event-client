@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useContext } from "react";
 import { HomeContext } from "../../pages";
 import GridContainer from "../GridContainer/GridContainer";
@@ -14,7 +13,7 @@ const CategoryGrid = () => {
           <SingleCategory key={category.id} category={category} />
         ))}
       </GridContainer>
-      <style jsx>{``}</style>
+     
     </>
   );
 };

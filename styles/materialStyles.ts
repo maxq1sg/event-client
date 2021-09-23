@@ -11,6 +11,18 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    padding: "5px",
+    position: "relative",
+  },
+  "base-input": {
+    border: "1px solid black",
+    borderRadius: "2px",
+    width: "100%",
+  },
 }));
 
 export default useStyles;

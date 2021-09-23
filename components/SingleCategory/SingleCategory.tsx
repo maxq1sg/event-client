@@ -1,6 +1,6 @@
 import Router from "next/dist/client/router";
 import Image from "next/image";
-import { FC, MouseEvent } from "react";
+import { FC, } from "react";
 import { ICategory } from "../../types/category";
 
 interface ISingleCategory {

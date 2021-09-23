@@ -1,12 +1,15 @@
-import { DateTimeFormatOptions } from './../types/DateTimeFormatOptions';
-export default function convertDate(date: Date) {
-  const dateOptions:DateTimeFormatOptions = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour:"numeric",
-    minute:"numeric"
-  };
-  return new Intl.DateTimeFormat('en-US', dateOptions).format()
+import dayjs from "dayjs";
+import { DateTimeFormatOptions } from "./../types/DateTimeFormatOptions";
+
+interface IOptions {
+  type: "day-only" | "full-date"|"hour-only";
+}
+export default function convertDate(date: Date, options: IOptions):string {
+  switch (options.type) {
+    case "day-only":
+      return dayjs(date).format("MMM D");
+    case "hour-only":
+      return dayjs(date).format("h:mm");
+  }
+  return ""
 }

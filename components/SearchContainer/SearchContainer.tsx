@@ -1,8 +1,7 @@
-import { IconButton } from "@material-ui/core";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { Formik, Form } from "formik";
-import { useContext, useEffect, useState } from "react";
-import { HomeContext } from "../../pages";
+import { useContext, useState } from "react";
+import { SearchPageContext } from "../../pages/search";
 import { IError } from "../../types/error";
 import { IEvent } from "../../types/event";
 import { ISearchInitValues } from "../../types/searchInitValues";
@@ -16,10 +15,10 @@ const SearchContainer = () => {
   const [searchResults, setSearchResults] = useState<IEvent[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<IError | null>(null);
-
+  const { categoryList } = useContext(SearchPageContext);
   const initialValues: ISearchInitValues = {
     query: "",
-    categories: [],
+    categories: categoryList?.map((category) => category.id) || [],
   };
   // useEffect(() => {
   //   console.log(searchResults, loading, error);

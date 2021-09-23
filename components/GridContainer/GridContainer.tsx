@@ -1,11 +1,10 @@
 import { FC } from "react";
 
 
-//todo vars
 const GridContainer: FC = ({ children }) => {
   return (
     <>
-      <div className="container">{children}</div>{" "}
+      <div className="container">{children}</div>
       <style jsx>{`
         .container {
           background: #ede7e6;

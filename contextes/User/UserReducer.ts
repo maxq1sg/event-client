@@ -1,6 +1,7 @@
+import { IAuthActions } from "./actions";
 import { EUserActionType, IUserContext } from "./types";
 
-export const userReducer = (state: IUserContext, action: any): IUserContext => {
+export const userReducer = (state: IUserContext, action: IAuthActions): IUserContext => {
   switch (action.type) {
     case EUserActionType.AUTH_USER_REQUEST:
       return { ...state, loading: true };

@@ -1,5 +1,4 @@
-import React, { ChangeEvent, Dispatch, FC, MutableRefObject, SetStateAction, useRef } from "react";
-import { WithClick } from "../../types/withClick";
+import React, { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
 
 interface IFileUploadProps {
   accept: string;
@@ -10,13 +9,12 @@ const FileUpload: FC<IFileUploadProps> = ({ accept, setFiles, children }) => {
   return (
     <label>
       <input
-        // ref={input}
         style={{ display: "none" }}
         type="file"
         name="files"
         accept={accept}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setFiles(e.target.files&&e.target.files[0])
+          setFiles( e.target.files?.[0])
         }
       />
       {children}
@@ -24,4 +22,4 @@ const FileUpload: FC<IFileUploadProps> = ({ accept, setFiles, children }) => {
   );
 };
 
-export default FileUpload
+export default FileUpload;

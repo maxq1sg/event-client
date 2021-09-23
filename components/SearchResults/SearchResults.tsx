@@ -32,7 +32,6 @@ const SearchResults: FC<ISearchResultsProps> = ({
   if (!searchResults) {
     return <Alert severity="info">Type something to search!</Alert>;
   }
-  console.log(searchResults?.length);
   if (!searchResults?.length) {
     return <Alert severity="info">Nothing found on your search query</Alert>;
   }

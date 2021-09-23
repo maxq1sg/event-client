@@ -3,10 +3,8 @@ import React from "react";
 import { CssBaseline } from "@material-ui/core";
 import UserProvider from "../contextes/User/UserContext";
 import EventProvider from "../contextes/Event/EventListContext";
-import { AppContextType } from "next/dist/shared/lib/utils";
-import App from "next/app";
-import { Router } from "next/dist/client/router";
-import $api from "../utils/api";
+import DayjsUtils from "@date-io/dayjs";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 function MyApp({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
@@ -16,23 +14,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, []);
   return (
-    <>
+    <MuiPickersUtilsProvider utils={DayjsUtils}>
       <UserProvider>
         <EventProvider>
           <CssBaseline />
           <Component {...pageProps} />
         </EventProvider>
       </UserProvider>
-    </>
+    </MuiPickersUtilsProvider>
   );
 }
-
-MyApp.getInitialProps = async (appContext: AppContextType<Router>) => {
-  const appProps = await App.getInitialProps(appContext);
-  // appProps.pageProps.categories = await $api.get("/api/category");
-  appProps.pageProps
-
-  return { ...appProps };
-};
 
 export default MyApp;

@@ -1,7 +1,6 @@
 import { Checkbox, FormControlLabel } from "@material-ui/core";
 import { FieldArray } from "formik";
 import { FC, useContext } from "react";
-import { HomeContext } from "../../pages";
 import { SearchPageContext } from "../../pages/search";
 import { ISearchInitValues } from "../../types/searchInitValues";
 

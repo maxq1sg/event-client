@@ -4,6 +4,9 @@ import Image from "next/image";
 import CustomTitle from "../CustomTitle/CustomTitle";
 import { Button, Card, CardActions } from "@material-ui/core";
 import Router from "next/dist/client/router";
+import useStyles from "../../styles/materialStyles";
+import convertDate from "../../utils/covertDate";
+import Day from "../Day/Day";
 
 interface SingleEventProps {
   event: IEvent;
@@ -14,32 +17,55 @@ const SingleEvent: FC<SingleEventProps> = ({ event }) => {
   const buttonClickHandler = (id: number) => {
     Router.push(`/events/list/${id}`);
   };
-
   const pathOnServer = event.preview?.path;
-  const src = `/static${pathOnServer ? pathOnServer : "/events/default.png"}`;
+
+  const previewSrc = `/static${pathOnServer || "/events/default.png"}`;
+  const categorySrc = `/static/categories/${event.category?.name}.svg`;
+  const styles = useStyles();
   return (
     <>
-      <Card>
-        <Image src={src} width={200} height={100} alt="event-preview" />
+      <Card className={styles.card}>
+        <div className={"image-container"}>
+          <Image
+            alt="image-preview"
+            src={previewSrc}
+            layout="fill"
+            className="image"
+            objectFit="cover"
+          />
+        </div>
         <CustomTitle>{event.name}</CustomTitle>
 
-        <CardActions>
-          <Button
-            onClick={() => buttonClickHandler(event.id)}
-            size="small"
-            color="primary"
-          >
-            more info
-          </Button>
-        </CardActions>
+        <div className="wrapper">
+          <CardActions>
+            <Button
+              onClick={() => buttonClickHandler(event.id)}
+              size="small"
+              color="primary"
+            >
+              more info
+            </Button>
+          </CardActions>
+          <div className="category-wrapper">
+            <Image
+              alt="image-category"
+              src={categorySrc}
+              width={50}
+              height={50}
+            />
+          </div>
+        </div>
+        <Day>{convertDate(event.date, { type: "day-only" })}</Day>
       </Card>
       <style jsx>{`
-        .event-wrapper {
-          background: white;
-          color: red;
+        .image-container {
+          min-height: 200px;
+          position: relative;
         }
-        .image-wrapper {
-          max-height: 130px;
+        .wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
       `}</style>
     </>
